@@ -17,10 +17,9 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run the Test.py script and capture its output
-                    def output = bat(script: 'python Test.py', returnStdout: true).trim()
-                    
-                    // Print the output to the Jenkins console
+                    def pythonExecutable = "C:\Users\DELL\AppData\Local\Programs\Python\Python310\python.exe"
+                    def output = bat(script: "${pythonExecutable} Test.py", returnStdout: true).trim()
+
                     echo "Test Output: $output"
                 }
             }
