@@ -1,35 +1,19 @@
-
 pipeline {
-    agent any
-    
-    stages {
+   stages {
         stage('Checkout') {
             steps {
-                git branch: 'python', url: 'https://github.com/priyadarsan1234/Test.git'
+               checkout scmGit(branches: [[name: '*/python']], extensions: [], userRemoteConfigs: [[credentialsId: '0a4c6aa9-a304-4dad-adfd-16fcf4d12e3b', url: 'https://github.com/priyadarsan1234/Test.git']])
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                sh 'pytest'
-            }
-        }
-        
         stage('Build') {
             steps {
-                sh 'python setup.py build'
+                git branch: 'python', credentialsId: '0a4c6aa9-a304-4dad-adfd-16fcf4d12e3b', url: 'https://github.com/priyadarsan1234/Test.git'
             }
         }
-        
-        
-    }
-    
-    post {
-        success {
-            echo 'Pipeline succeeded! Project deployed.'
-        }
-        failure {
-            echo 'Pipeline failed! Deployment aborted.'
+       stage('Test') {
+            steps {
+                bat 'python Test.py'
+            }
         }
     }
 }
