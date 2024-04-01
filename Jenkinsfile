@@ -16,12 +16,15 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Run the Test.py script and capture its output
-                def output = bat script: 'python Test.py', returnStdout: true
-                
-                // Print the output to the Jenkins console
-                echo "Test Output: $output"
+                script {
+                    // Run the Test.py script and capture its output
+                    def output = bat(script: 'python Test.py', returnStdout: true).trim()
+                    
+                    // Print the output to the Jenkins console
+                    echo "Test Output: $output"
+                }
             }
         }
     }
 }
+
