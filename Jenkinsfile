@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    def pythonExecutable = "C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"
+                    def pythonExecutable = "C:\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"
                     def output = bat(script: "${pythonExecutable} Test.py", returnStdout: true).trim()
 
                     echo "Test Output: $output"
